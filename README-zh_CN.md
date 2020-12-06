@@ -1,8 +1,8 @@
-my-rc-form is a form component that imitates ant design 4 Form component. It can be used both in class components and function components.
+my-rc-form，简单模仿ant design 4 Form表单组件，能够在类组件和函数组件中使用
 
-## Instruction
+## 使用方法
 
-### function component
+### 函数组件
 
 ```javascript
 import React, { useEffect } from "react";
@@ -45,7 +45,7 @@ export default function MyRCFieldForm(props) {
 }
 ```
 
-### class component
+### 类组件
 
 ```javascript
 import React from "react";
