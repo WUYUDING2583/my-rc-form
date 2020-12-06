@@ -1,3 +1,5 @@
+**English** | [**简体中文**](https://github.com/yuyi2583/my-rc-form/blob/master/README-zh_CN.md)
+
 my-rc-form is a form component that imitates ant design 4 Form component. It can be used both in class components and function components.
 
 ## Instruction

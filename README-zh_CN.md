@@ -1,3 +1,5 @@
+[**English**](https://github.com/yuyi2583/my-rc-form/blob/master/README.md) | **简体中文**
+
 my-rc-form，简单模仿ant design 4 Form表单组件，能够在类组件和函数组件中使用
 
 ## 使用方法
