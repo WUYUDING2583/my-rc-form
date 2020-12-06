@@ -21,14 +21,9 @@ const passwordRule = { required: true, message: "please input password!" };
 
 //     }
 
-//     // const changeContext=()=>{
-//     //     form.a=1;
-//     //     console.log("changecontext",form);
-//     // }
 //     return (
 //         <>
 //             <h3>MyRCFieldForm</h3>
-//             {/* <button onClick={changeContext}>change context</button> */}
 //             <Form form={form} onFinish={onFinish} onFinishFailed={onFinishFailed}>
 //                 <Field name="username" rules={[nameRule]}>
 //                     <Input placeholder="username"/>
@@ -44,9 +39,6 @@ const passwordRule = { required: true, message: "please input password!" };
 
 export default class MyRCFieldForm extends React.Component {
 
-    state = {
-        num: 0
-    }
     formRef = React.createRef();
     componentDidMount() {
         this.formRef.current.setFieldsValue({username:"default"});
@@ -67,7 +59,6 @@ export default class MyRCFieldForm extends React.Component {
         return (
             <>
                 <h3>MyRCFieldForm</h3>
-                <button onClick={() => this.setState({ num: num + 1 })}>{num}</button>
                 <Form ref={this.formRef} onFinish={this.onFinish} onFinishFailed={this.onFinishFailed}>
                     <Field name="username" rules={[nameRule]}>
                         <Input placeholder="username" />

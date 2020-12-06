@@ -1,70 +1,94 @@
-# Getting Started with Create React App
+my-rc-form，简单模仿ant design 4 Form表单组件，能够在类组件和函数组件中使用
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## 使用方法
 
-## Available Scripts
+### 函数组件
 
-In the project directory, you can run:
+```javascript
+import React, { useEffect } from "react";
+import Input from "../../components/Input";
+import Form, { Field, useForm } from "../../components/my-rc-field-form";
 
-### `npm start`
+const nameRule = { required: true, message: "please input username!" };
+const passwordRule = { required: true, message: "please input password!" };
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+export default function MyRCFieldForm(props) {
+    const [form]=Form.useForm();
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+    const onFinish=val=>{
+        console.log("onFinish",val);
+    }
 
-### `npm test`
+    useEffect(()=>{
+        form.setFieldsValue({username:"default"});
+    },[])
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+    const onFinishFailed=val=>{
+        console.log("onFinishFailed",val);
 
-### `npm run build`
+    }
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+    return (
+        <>
+            <h3>MyRCFieldForm</h3>
+            <Form form={form} onFinish={onFinish} onFinishFailed={onFinishFailed}>
+                <Field name="username" rules={[nameRule]}>
+                    <Input placeholder="username"/>
+                </Field>
+                <Field name="password" rules={[passwordRule]}>
+                    <Input placeholder="password"/>
+                </Field>
+                <button>Submit</button>
+            </Form>
+        </>
+    )
+}
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### 类组件
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```javascript
+import React from "react";
+import Input from "../../components/Input";
+import Form, { Field, useForm } from "../../components/my-rc-field-form";
 
-### `npm run eject`
+const nameRule = { required: true, message: "please input username!" };
+const passwordRule = { required: true, message: "please input password!" };
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+export default class MyRCFieldForm extends React.Component {
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+    formRef = React.createRef();
+    componentDidMount() {
+        this.formRef.current.setFieldsValue({username:"default"});
+    }
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+    onFinish = val => {
+        console.log("onFinish", val);
+    }
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
-## Learn More
+    onFinishFailed = (val,err) => {
+        console.log("onFinishFailed", val,err);
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+    }
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+    render() {
+        const { num } = this.state;
+        return (
+            <>
+                <h3>MyRCFieldForm</h3>
+                <Form ref={this.formRef} onFinish={this.onFinish} onFinishFailed={this.onFinishFailed}>
+                    <Field name="username" rules={[nameRule]}>
+                        <Input placeholder="username" />
+                    </Field>
+                    <Field name="password" rules={[passwordRule]}>
+                        <Input placeholder="password" />
+                    </Field>
+                    <button>Submit</button>
+                </Form>
+            </>
+        )
+    }
+}
+```
 
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
